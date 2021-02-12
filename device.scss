@@ -1,0 +1,37 @@
+@mixin device($bg, $width, $height) {
+    background-image: $bg;
+    width: $width;
+    height: $height;
+  }
+  
+  @mixin scrn($top, $s-width, $s-height) {
+    margin-top: $top;
+    width: $s-width;
+    height: $s-height;
+  }
+  
+  @mixin elem($name, $bg, $width, $height, $top, $s-width, $s-height) {
+    &_type_#{$name} {
+      @include device($bg, $width, $height);
+    }
+    &__screen {
+        object-position: top center;
+        object-fit: cover;
+        display: inline-block;
+        &_type_#{$name} {
+            @include scrn($top, $s-width, $s-height);
+        }
+    }    
+  }
+  
+  .device {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    text-align: center;
+    @include elem(desktop, url(../../images/desktop.png), 452px, 358px, 3%, 95%, 67%);
+    @include elem(laptop, url(../../images/laptop.png), 302px, 173px, 6%, 77%, 77%);
+    @include elem(phone, url(../../images/phone.png), 110px, 192px, 18%, 85%, 74%);
+    @include elem(tab, url(../../images/tab.png), 209px, 293px, 14%, 87%, 75%);
+  }
